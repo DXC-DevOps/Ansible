@@ -2,4 +2,4 @@
   hosts: all
   tasks:
     - name: run test script
-      script: Windows2012R2.ps1
+      script: test.ps1

@@ -15,6 +15,10 @@ $xmlElementToModify = $xmlElement.Plugins
 
 foreach ($element in $xmlElementToModify.Plugin)
 {
+    if ($element.name -eq "Ec2HandleUserData")
+    {
+        $element.State="Enabled"
+    }
     if ($element.name -eq "AWS.EC2.Windows.CloudWatch.PlugIn")
     {
         $element.State="Enabled"

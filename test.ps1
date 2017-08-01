@@ -5,7 +5,7 @@ $BackUpPath = "C:\awstemp\EC2Install.zip"
 $Destination = "C:\awstemp"
 Add-Type -assembly "system.io.compression.filesystem"
 [io.compression.zipfile]::ExtractToDirectory($BackUpPath, $destination)
-cd c:\Temp
+cd c:\awstemp
 $ssminstall=.\Ec2Install.exe /quiet /norestart
 
 $EC2SettingsFile="C:\Program Files\Amazon\Ec2ConfigService\Settings\Config.xml"

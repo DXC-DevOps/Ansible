@@ -16,8 +16,8 @@
      - name: CPU Alarm
        ec2_metric_alarm:
          state: present
-         region: {{ region }}
-         name: "cpu-util{{ resource }}"
+         region: "{{ region }}"
+         name: "cpu-util {{ resource }}"
          metric: "CPUUtilization"
          namespace: "AWS/EC2"
          statistic: Average

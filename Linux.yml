@@ -19,7 +19,5 @@
        yum: name=/home/ec2-user/amazon-ssm-agent.rpm state=present
      - name: Start and Enable ssm agent
        service: name=amazon-ssm-agent state=started enabled=yes
-     - name: Download CrowdStrike Agent
-       get_url: url="https://s3.amazonaws.com/dxc.customer.config-641434276274-us-east-1/deploy/externs/falcon-sensor-3.3.0-3302.el7.x86_64.rpm" dest="/home/ec2-user/falcon-sensor-3.3.0-3302.el7.x86_64.rpm" mode=0755
-     - name: Install CrowdStrike Agent
-       shell: sudo rpm -Uvh falcon-sensor-3.3.0-3302.el7.x86_64.rpm
+- include: install-boto.yml
+- include: cloudwatch-alarm.yml

@@ -25,3 +25,4 @@ foreach ($element in $xmlElementToModify.Plugin)
     }
 }
 $xml.Save($EC2SettingsFile)
+restart-service AmazonSSMAgent

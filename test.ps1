@@ -8,7 +8,7 @@ Add-Type -assembly "system.io.compression.filesystem"
 cd c:\awstemp
 $ssminstall=.\Ec2Install.exe /quiet /norestart
 
-$EC2SettingsFile="C:\Program Files\Amazon\Ec2ConfigService\Settings\Config.xml"
+$EC2SettingsFile="C:\Program Files\Amazon\Ec2ConfigService\Settings\config.xml"
 $xml = [xml](get-content $EC2SettingsFile)
 $xmlElement = $xml.get_DocumentElement()
 $xmlElementToModify = $xmlElement.Plugins

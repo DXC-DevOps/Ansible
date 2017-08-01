@@ -3,8 +3,6 @@
   become: True
   gather_facts: False
   tasks:
-     - name: Get Instance Id
-       shell: Instance_ID="`wget -q -O - http://169.254.169.254/latest/meta-data/instance-id`"
      - name: CPU Alarm
        ec2_metric_alarm:
          state: present

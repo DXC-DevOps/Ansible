@@ -1,0 +1,8 @@
+- name: Enable group metrics
+  boto3:
+    service: autoscaling
+    region: us-east-1
+    operation: enable_metrics_collection
+    parameters:
+      AutoScalingGroupName: my-auto-scaling-group
+      Granularity: 1Minute

@@ -1,8 +1,8 @@
-New-Item -Path c:\Temp -ItemType directory
+New-Item -Path c:\awstemp -ItemType directory
 write-host "Installing and Enabling SSM agent"
-Invoke-WebRequest -Uri "https://s3.amazonaws.com/ec2-downloads-windows/EC2Config/EC2Install.zip" -OutFile "C:\Temp\EC2Install.zip"
-$BackUpPath = "C:\Temp\EC2Install.zip"
-$Destination = "C:\Temp"
+Invoke-WebRequest -Uri "https://s3.amazonaws.com/ec2-downloads-windows/EC2Config/EC2Install.zip" -OutFile "C:\awstemp\EC2Install.zip"
+$BackUpPath = "C:\awstemp\EC2Install.zip"
+$Destination = "C:\awstemp"
 Add-Type -assembly "system.io.compression.filesystem"
 [io.compression.zipfile]::ExtractToDirectory($BackUpPath, $destination)
 cd c:\Temp

@@ -3,21 +3,11 @@
   become: True
   gather_facts: False
   tasks:
-     - name: Gather EC2 instance metadata
-       action: ec2_facts
-     - name: Obtain EC2 tags for this instance
-       local_action:
-         module: ec2_tag
-         region: "{{ ansible_ec2_placement_region }}"
-         resource: "{{ ansible_ec2_instance_id }}"
-         state: list
-     #- name: Get Instance ID
-       #shell: EC2_INSTANCE_ID="`wget -q -O - http://169.254.169.254/latest/meta-data/instance-id`"
      - name: CPU Alarm
        ec2_metric_alarm:
          state: present
-         region: "{{ region }}"
-         name: "cpu-util {{ resource }}"
+         region: us-west-2
+         name: "cpu-util"
          metric: "CPUUtilization"
          namespace: "AWS/EC2"
          statistic: Average
@@ -27,14 +17,14 @@
          evaluation_periods: 3
          unit: "Percent"
          description: "This will alarm when instance cpu usage is greater than 85% for 15 minutes "
-         dimensions: {'InstanceId': "{{ resource }}" }
+         dimensions: {'InstanceId': "InstanceID" }
          alarm_actions: ["arn:aws:sns:us-west-2:641434276274:Logging-rInstanceAlarmTopic-MINIPSHEPMCM"]
          
      - name: Status Failed
        ec2_metric_alarm:
          state: present
          region: us-west-2
-         name: "status-failed{{EC2_INSTANCE_ID}}"
+         name: "status-failed"
          metric: "StatusCheckFailed"
          namespace: "AWS/EC2"
          statistic: Minimum
@@ -44,5 +34,76 @@
          evaluation_periods: 3
          unit: "Percent"
          description: "This will alarm when instance status check fails"
-         dimensions: {'InstanceId': "{{ EC2_INSTANCE_ID }}" }
+         dimensions: {'InstanceId': "INSTANCE_ID" }
          alarm_actions: ["arn:aws:sns:us-west-2:641434276274:Logging-rInstanceAlarmTopic-MINIPSHEPMCM"]
+         
+     - name: StatusFailedSystem
+       ec2_metric_alarm:
+         state: present
+         region: us-west-2
+         name: "status-failed-system"
+         metric: "StatusCheckFailed_System"
+         namespace: "AWS/EC2"
+         statistic: Minimum
+         comparison: ">"
+         threshold: 0
+         period: 60
+         evaluation_periods: 3
+         unit: "Percent"
+         description: "This will alarm when instance status check fails"
+         dimensions: {'InstanceId': "INSTANCE_ID" }
+         alarm_actions: ["arn:aws:sns:us-west-2:641434276274:Logging-rInstanceAlarmTopic-MINIPSHEPMCM"] 
+     
+     - name: StatusFailedInstance
+       ec2_metric_alarm:
+         state: present
+         region: us-west-2
+         name: "status-failed-instance"
+         metric: "StatusCheckFailed_Instance"
+         namespace: "AWS/EC2"
+         statistic: Minimum
+         comparison: ">"
+         threshold: 0
+         period: 60
+         evaluation_periods: 3
+         unit: "Percent"
+         description: "This will alarm when instance status check fails"
+         dimensions: {'InstanceId': "INSTANCE_ID" }
+         alarm_actions: ["arn:aws:sns:us-west-2:641434276274:Logging-rInstanceAlarmTopic-MINIPSHEPMCM"]
+         
+     - name: MemoryUtilAlarm
+       ec2_metric_alarm:
+         state: present
+         region: us-west-2
+         name: "memory-util"
+         metric: "MemoryUtilization"
+         namespace: "Windows/Default"
+         statistic: Minimum
+         comparison: ">"
+         threshold: 85
+         period: 300
+         evaluation_periods: 2
+         unit: "Percent"
+         description: "Alarm is triggered when the memory is full"
+         dimensions: {'InstanceId': "INSTANCE_ID" }
+         alarm_actions: ["arn:aws:sns:us-west-2:641434276274:Logging-rInstanceAlarmTopic-MINIPSHEPMCM"]
+         
+     - name: DiskUtilAlarm
+       ec2_metric_alarm:
+         state: present
+         region: us-west-2
+         name: "disk-util"
+         metric: "DiskSpaceUtilization"
+         namespace: "Windows/Default"
+         statistic: Minimum
+         comparison: ">"
+         threshold: 85
+         period: 300
+         evaluation_periods: 2
+         unit: "Percent"
+         description: "Alarm is triggered when the memory is full"
+         dimensions: {'InstanceId': "INSTANCE_ID"}
+         alarm_actions: ["arn:aws:sns:us-west-2:641434276274:Logging-rInstanceAlarmTopic-MINIPSHEPMCM"]
+         
+     
+     

@@ -9,7 +9,7 @@
        ec2_metric_alarm:
          state: present
          region: us-west-2
-         name: "cpu-util{{ansible_ec2_instance_id}}"
+         name: "cpu-util{{ec2_tag}}"
          metric: "CPUUtilization"
          namespace: "AWS/EC2"
          statistic: Average
@@ -19,7 +19,7 @@
          evaluation_periods: 3
          unit: "Percent"
          description: "This will alarm when instance cpu usage is greater than 85% for 15 minutes "
-         dimensions: {'InstanceId': "{{ ansible_ec2_instance_id }}" }
+         dimensions: {'InstanceId': "{{ ec2.instance_ids }}" }
          alarm_actions: ["arn:aws:sns:us-west-2:641434276274:Logging-rInstanceAlarmTopic-MINIPSHEPMCM"]
          
      - name: Status Failed

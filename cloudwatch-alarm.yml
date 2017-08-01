@@ -5,8 +5,7 @@
   tasks:
      - name: Get instance ID
        action: ec2_facts
-       vars:
-         insta_Id: "{{ ansible_ec2_instance_id }}"
+       insta_Id: "{{ ansible_ec2_instance_id }}"
      - name: CPU Alarm
        ec2_metric_alarm:
          state: present

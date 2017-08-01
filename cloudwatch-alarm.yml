@@ -4,12 +4,12 @@
   gather_facts: False
   tasks:
      - name: Get Instance ID
-       shell: EC2_INSTANCE_ID="`wget -q -O - http://169.254.169.254/latest/meta-data/instance-id`"
+       #shell: EC2_INSTANCE_ID="`wget -q -O - http://169.254.169.254/latest/meta-data/instance-id`"
      - name: CPU Alarm
        ec2_metric_alarm:
          state: present
          region: us-west-2
-         name: "cpu-util{{EC2_INSTANCE_ID}}"
+         name: "cpu-util{{ansible_ec2_instance_id}}"
          metric: "CPUUtilization"
          namespace: "AWS/EC2"
          statistic: Average
@@ -19,7 +19,7 @@
          evaluation_periods: 3
          unit: "Percent"
          description: "This will alarm when instance cpu usage is greater than 85% for 15 minutes "
-         dimensions: {'InstanceId': "{{ EC2_INSTANCE_ID }}" }
+         dimensions: {'InstanceId': "{{ ansible_ec2_instance_id }}" }
          alarm_actions: ["arn:aws:sns:us-west-2:641434276274:Logging-rInstanceAlarmTopic-MINIPSHEPMCM"]
          
      - name: Status Failed

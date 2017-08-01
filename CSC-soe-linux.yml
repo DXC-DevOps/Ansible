@@ -1,0 +1,25 @@
+- name: Linux MSP 
+  hosts: all
+  become: True
+  #become_method: su
+  #become_user: root
+  gather_facts: False
+  tasks:
+     - name: Copy user-data
+       template:
+        src: user-data.sh
+        dest: /tmp/user-data.sh
+     - name: Setting Up Systemd for Amazon Linux
+       shell: sudo yum-config-manager --enable epel
+     - name: Setup cloudwatch logs
+       shell: bash /tmp/user-data.sh
+     - name: download ssm agent
+       get_url: url="https://amazon-ssm-us-west-2.s3.amazonaws.com/latest/linux_amd64/amazon-ssm-agent.rpm" dest="/tmp/amazon-ssm-agent.rpm" mode=0755
+     - name: sudo install ssm agent
+       yum: name=/tmp/amazon-ssm-agent.rpm state=present
+     - name: Start and Enable ssm agent
+       service: name=amazon-ssm-agent state=started enabled=yes
+     - name: Download CrowdStrike Agent
+       get_url: url="https://s3.amazonaws.com/dxc.customer.config-641434276274-us-east-1/deploy/externs/falcon-sensor-3.3.0-3302.el7.x86_64.rpm" dest="/tmp/falcon-sensor-3.3.0-3302.el7.x86_64.rpm" mode=0755
+     - name: Install CrowdStrike Agent
+       shell: sudo rpm -Uvh falcon-sensor-3.3.0-3302.el7.x86_64.rpm

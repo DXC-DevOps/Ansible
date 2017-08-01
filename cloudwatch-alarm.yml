@@ -1,16 +1,21 @@
 - name: create CPUUtilAlarm
-  ec2_metric_alarm:
-    state: present
-    region: us-west-2
-    name: "cpu-low"
-    metric: "CPUUtilization"
-    namespace: "AWS/EC2"
-    statistic: Average
-    comparison: ">="
-    threshold: 8.5
-    period: 300
-    evaluation_periods: 3
-    unit: "Percent"
-    description: "This will alarm when instance cpu usage is greater than 85% for 15 minutes "
-    dimensions: {'InstanceId':'i-XXX'}
-    alarm_actions: ["arn:aws:sns:us-west-2:641434276274:Logging-rInstanceAlarmTopic-MINIPSHEPMCM"]
+  hosts: all
+  become: True
+  gather_facts: False
+  tasks:
+     - name: CPU Alarm
+       ec2_metric_alarm:
+         state: present
+         region: us-west-2
+         name: "cpu-low"
+         metric: "CPUUtilization"
+         namespace: "AWS/EC2"
+         statistic: Average
+         comparison: ">="
+         threshold: 8.5
+         period: 300
+         evaluation_periods: 3
+         unit: "Percent"
+         description: "This will alarm when instance cpu usage is greater than 85% for 15 minutes "
+         dimensions: {'InstanceId':'i-XXX'}
+         alarm_actions: ["arn:aws:sns:us-west-2:641434276274:Logging-rInstanceAlarmTopic-MINIPSHEPMCM"]

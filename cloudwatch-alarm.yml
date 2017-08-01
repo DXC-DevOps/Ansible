@@ -9,7 +9,7 @@
        ec2_metric_alarm:
          state: present
          region: us-west-2
-         name: "cpu-util{{ec2_tag}}"
+         name: "cpu-util{{ ec2.instance_ids }}"
          metric: "CPUUtilization"
          namespace: "AWS/EC2"
          statistic: Average

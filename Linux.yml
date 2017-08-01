@@ -11,13 +11,17 @@
         dest: /home/ec2-user/user-data.sh
      - name: Setting Up Systemd for Amazon Linux
        shell: sudo yum-config-manager --enable epel
+       ignore_errors: yes
      - name: Setup cloudwatch logs
        shell: bash /home/ec2-user/user-data.sh
+       ignore_errors: yes
      - name: download ssm agent
        get_url: url="https://amazon-ssm-us-west-2.s3.amazonaws.com/latest/linux_amd64/amazon-ssm-agent.rpm" dest="/home/ec2-user/amazon-ssm-agent.rpm" mode=0755
      - name: sudo install ssm agent
        yum: name=/home/ec2-user/amazon-ssm-agent.rpm state=present
+       ignore_errors: yes
      - name: Start and Enable ssm agent
        service: name=amazon-ssm-agent state=started enabled=yes
+       ignore_errors: yes
 - include: install-boto.yml
 - include: cloudwatch-alarm.yml

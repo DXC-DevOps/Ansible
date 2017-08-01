@@ -1,0 +1,9 @@
+- name: Installing Boto
+  hosts: all
+  become: True
+  gather_facts: False
+  tasks:
+     - name: Install python-pip
+       yum: name=python-pip
+     - name: pip install boto
+       pip: name=boto

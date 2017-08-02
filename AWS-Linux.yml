@@ -1,4 +1,4 @@
-- name: Linux MSP 
+- name: AWS Linux MSP 
   hosts: all
   become: True
   #become_method: su

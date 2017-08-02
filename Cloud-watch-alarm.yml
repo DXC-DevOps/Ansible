@@ -1,7 +1,7 @@
 - name: Creating CloudWatch Alarm for Windows instance
   hosts: all
   tasks:
-    - name: run test script
+    - name: Download required packages
       script: aws-cli.ps1
     - name: install the msi package
       win_msi:

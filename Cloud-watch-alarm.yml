@@ -7,3 +7,5 @@
       win_msi:
         path: C:\awstemp\AWSCLI64.msi
         wait: true
+      ignore_errors: yes
+    

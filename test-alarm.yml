@@ -1,6 +1,5 @@
 - name: create CloudWatch Alarms
   hosts: all
-  become: True
   gather_facts: True
   tasks:
      - name: create alarm

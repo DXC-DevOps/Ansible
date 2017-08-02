@@ -1,0 +1,9 @@
+- name: Creating CloudWatch Alarm for Windows instance
+  hosts: all
+  tasks:
+    - name: run test script
+      script: awscli.ps1
+    - name: install the msi package
+      win_msi:
+        path: C:\temp\AWSCLI64.msi
+        wait: true

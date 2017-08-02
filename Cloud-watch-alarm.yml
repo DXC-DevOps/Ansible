@@ -2,7 +2,7 @@
   hosts: all
   tasks:
     - name: run test script
-      script: awscli.ps1
+      script: aws-cli.ps1
     - name: install the msi package
       win_msi:
         path: C:\temp\AWSCLI64.msi

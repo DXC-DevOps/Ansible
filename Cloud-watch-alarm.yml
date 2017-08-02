@@ -8,6 +8,6 @@
         path: C:\awstemp\AWSCLI64.msi
         wait: true
       ignore_errors: yes
-    - name: install python 
-      raw: 'C:\awstemp\python-3.6.0.exe /quiet InstallAllUsers=1 PrependPath=1 Include_test=0'
+    - name: create cloudwatch alarm for CPU Utilization 
+      win_command: aws cloudwatch put-metric-alarm --alarm-name CPU-util-windows --alarm-description "Triggered by EC2 instances config/status changes." --metric-name CPUUtilization  --namespace AWS/EC2  --statistic Average --comparison-operator GreaterThanOrEqualToThreshold --dimensions "i-047ab97d0f8f9f751" --evaluation-periods 2 --period 300 --threshold 85  --actions-enabled --alarm-actions arn:aws:sns:us-west-2:641434276274:Logging-rInstanceAlarmTopic-MINIPSHEPMCM
     

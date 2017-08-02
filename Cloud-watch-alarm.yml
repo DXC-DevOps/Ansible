@@ -9,5 +9,5 @@
         wait: true
       ignore_errors: yes
     - name: create cloudwatch alarm for CPU Utilization 
-      win_command: aws cloudwatch put-metric-alarm --alarm-name CPU-util-windows --alarm-description "Triggered by EC2 instances config/status changes." --metric-name CPUUtilization  --namespace AWS/EC2  --statistic Average --comparison-operator GreaterThanOrEqualToThreshold --region us-west-2 --evaluation-periods 2 --period 300 --threshold 85  --actions-enabled --alarm-actions arn:aws:sns:us-west-2:641434276274:Logging-rInstanceAlarmTopic-MINIPSHEPMCM
+      win_shell: aws cloudwatch put-metric-alarm --alarm-name CPU-util-windows --alarm-description "Triggered by EC2 instances config/status changes." --metric-name CPUUtilization  --namespace AWS/EC2  --statistic Average --comparison-operator GreaterThanOrEqualToThreshold --region us-west-2 --evaluation-periods 2 --period 300 --threshold 85  --actions-enabled --alarm-actions arn:aws:sns:us-west-2:641434276274:Logging-rInstanceAlarmTopic-MINIPSHEPMCM
     

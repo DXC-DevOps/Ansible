@@ -5,5 +5,5 @@
       script: aws-cli.ps1
     - name: install the msi package
       win_msi:
-        path: C:\temp\AWSCLI64.msi
+        path: C:\awstemp\AWSCLI64.msi
         wait: true

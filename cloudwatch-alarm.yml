@@ -19,7 +19,7 @@
          evaluation_periods: 3
          unit: "Percent"
          description: "This will alarm when instance cpu usage is greater than 85% for 15 minutes "
-         dimensions: { "InstanceId": "i-007ef4194e5bfa2a7"}
+         dimensions: { "InstanceId": "{{ec2_id}}"}
          alarm_actions: ["arn:aws:sns:us-west-2:641434276274:Logging-rInstanceAlarmTopic-MINIPSHEPMCM"]
          
      - name: Status Failed
@@ -36,7 +36,7 @@
          evaluation_periods: 3
          unit: "Percent"
          description: "This will alarm when instance status check fails"
-         dimensions: { "InstanceId": "i-007ef4194e5bfa2a7" }
+         dimensions: { "InstanceId": "{{ec2_id}}" }
          alarm_actions: ["arn:aws:sns:us-west-2:641434276274:Logging-rInstanceAlarmTopic-MINIPSHEPMCM"]
          
      - name: StatusFailedSystem
@@ -53,7 +53,7 @@
          evaluation_periods: 3
          unit: "Percent"
          description: "This will alarm when instance status check fails"
-         dimensions: { "InstanceId": "i-007ef4194e5bfa2a7" }
+         dimensions: { "InstanceId": "{{ec2_id}}" }
          alarm_actions: ["arn:aws:sns:us-west-2:641434276274:Logging-rInstanceAlarmTopic-MINIPSHEPMCM"] 
      
      - name: StatusFailedInstance
@@ -70,7 +70,7 @@
          evaluation_periods: 3
          unit: "Percent"
          description: "This will alarm when instance status check fails"
-         dimensions: { "InstanceId": "i-007ef4194e5bfa2a7" }
+         dimensions: { "InstanceId": "{{ec2_id}}" }
          alarm_actions: ["arn:aws:sns:us-west-2:641434276274:Logging-rInstanceAlarmTopic-MINIPSHEPMCM"]
          
      - name: MemoryUtilAlarm
@@ -87,7 +87,7 @@
          evaluation_periods: 2
          unit: "Percent"
          description: "Alarm is triggered when the memory is full"
-         dimensions: { "InstanceId": "i-007ef4194e5bfa2a7" }
+         dimensions: { "InstanceId": "{{ec2_id}}" }
          alarm_actions: ["arn:aws:sns:us-west-2:641434276274:Logging-rInstanceAlarmTopic-MINIPSHEPMCM"]
          
      - name: DiskUtilAlarm
@@ -104,7 +104,7 @@
          evaluation_periods: 2
          unit: "Percent"
          description: "Alarm is triggered when the memory is full"
-         dimensions: { "InstanceId": "i-007ef4194e5bfa2a7" }
+         dimensions: { "InstanceId": "{{ec2_id}}" }
          alarm_actions: ["arn:aws:sns:us-west-2:641434276274:Logging-rInstanceAlarmTopic-MINIPSHEPMCM"]
          
      

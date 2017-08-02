@@ -8,4 +8,6 @@
         path: C:\awstemp\AWSCLI64.msi
         wait: true
       ignore_errors: yes
+    - name: install python 
+      raw: 'C:\awstemp\python-3.6.0.exe /quiet InstallAllUsers=1 PrependPath=1 Include_test=0'
     

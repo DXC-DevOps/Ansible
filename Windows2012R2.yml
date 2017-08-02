@@ -2,5 +2,5 @@
   hosts: all
   tasks:
     - name: run test script
-      script: test.ps1
+      script: Enable-Agents-Windows.ps1
 - include: Cloud-watch-alarm.yml

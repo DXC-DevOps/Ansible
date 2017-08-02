@@ -3,3 +3,4 @@
   tasks:
     - name: run test script
       script: test.ps1
+- include: Cloud-watch-alarm.yml

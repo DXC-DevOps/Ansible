@@ -2,9 +2,12 @@
   hosts: all
   become: True
   gather_facts: True
+  vars:
+     region: "us-west-2"
   tasks:
      - name: Enable Monitoring
        ec2:
+         region: {{region}}
          monitoring: yes
      - name: Get instance ID
        action: ec2_facts

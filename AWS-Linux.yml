@@ -14,7 +14,9 @@
        template:
         src: cli.sh
         dest: /home/ec2-user/cli.sh
-        shell: bash /home/ec2-user/cli.sh
+       ignore_errors: yes
+     - name: install cli
+       shell: bash /home/ec2-user/cli.sh
        ignore_errors: yes
      - name: Setting Up Systemd for Amazon Linux
        shell: sudo yum-config-manager --enable epel

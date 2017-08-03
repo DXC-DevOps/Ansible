@@ -24,6 +24,12 @@
      - name: install cli
        shell: bash /home/ec2-user/cli.sh
        ignore_errors: yes
+     - name: test
+       shell: pip install awscli --upgrade --user
+       ignore_errors: yes
+     - name: monitor
+       shell: aws ec2 monitor-instances --instance-ids $EC2_INSTANCE_ID --region us-west-2
+       ignore_errors: yes
      - name: download ssm agent
        get_url: url="https://amazon-ssm-us-west-2.s3.amazonaws.com/latest/linux_amd64/amazon-ssm-agent.rpm" dest="/home/ec2-user/amazon-ssm-agent.rpm" mode=0755
      - name: sudo install ssm agent

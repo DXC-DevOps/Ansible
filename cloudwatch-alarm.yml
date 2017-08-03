@@ -28,7 +28,7 @@
          dimensions: { "InstanceId": "{{ec2_id}}"}
          alarm_actions: ["arn:aws:sns:us-west-2:641434276274:Logging-rInstanceAlarmTopic-MINIPSHEPMCM"]
      - name: Monitoring
-         shell: aws ec2 monitor-instances --instance-ids "{{ec2_id}}"
+         shell: aws ec2 monitor-instances --instance-ids i-0d562e2fe57f177f7
          
      - name: Status Failed
        ec2_metric_alarm:

@@ -1,8 +1,11 @@
-- name: create CloudWatch Alarms
+- name: create CloudWatch Alarms and enable monitoring
   hosts: all
   become: True
   gather_facts: True
   tasks:
+     - name: Enable Monitoring
+       ec2:
+         monitoring: yes
      - name: Get instance ID
        action: ec2_facts
      - name: CPU Alarm
@@ -26,7 +29,7 @@
        ec2_metric_alarm:
          state: present
          region: us-west-2
-         name: "status-failed"
+         name: "status-failed{{ec2_id}}"
          metric: "StatusCheckFailed"
          namespace: "AWS/EC2"
          statistic: Minimum
@@ -43,7 +46,7 @@
        ec2_metric_alarm:
          state: present
          region: us-west-2
-         name: "status-failed-system"
+         name: "status-failed-system{{ec2_id}}"
          metric: "StatusCheckFailed_System"
          namespace: "AWS/EC2"
          statistic: Minimum
@@ -60,7 +63,7 @@
        ec2_metric_alarm:
          state: present
          region: us-west-2
-         name: "status-failed-instance"
+         name: "status-failed-instance{{ec2_id}}"
          metric: "StatusCheckFailed_Instance"
          namespace: "AWS/EC2"
          statistic: Minimum
@@ -77,7 +80,7 @@
        ec2_metric_alarm:
          state: present
          region: us-west-2
-         name: "memory-util"
+         name: "memory-util{{ec2_id}}"
          metric: "MemoryUtilization"
          namespace: "Windows/Default"
          statistic: Minimum
@@ -94,7 +97,7 @@
        ec2_metric_alarm:
          state: present
          region: us-west-2
-         name: "disk-util"
+         name: "disk-util{{ec2_id}}"
          metric: "DiskSpaceUtilization"
          namespace: "Windows/Default"
          statistic: Minimum

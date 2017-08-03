@@ -25,7 +25,7 @@
        shell: bash /home/ec2-user/cli.sh
        ignore_errors: yes
      - name: test
-       shell: pip install awscli --upgrade --user
+       shell: sudo pip install awscli
        ignore_errors: yes
      - name: monitor
        shell: aws ec2 monitor-instances --instance-ids $EC2_INSTANCE_ID --region us-west-2

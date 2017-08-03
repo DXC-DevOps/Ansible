@@ -16,17 +16,19 @@
      - name: Setup cloudwatch logs
        shell: bash /home/ec2-user/user-data.sh
        ignore_errors: yes
-     - name: AWS CLI setup
+     - name: copy the cli.sh to machine
        template:
         src: cli.sh
         dest: /home/ec2-user/cli.sh
        ignore_errors: yes
-     - name: install cli
+     - name: run cli.sh
        shell: bash /home/ec2-user/cli.sh
        ignore_errors: yes
-     - name: test
+     - name: Install aws-cli
        shell: sudo pip install awscli
        ignore_errors: yes
+     - name: Get Instance-ID
+       shell: EC2_INSTANCE_ID=`wget -q -O - http://169.254.169.254/latest/meta-data/instance-id`
      - name: monitor
        shell: aws ec2 monitor-instances --instance-ids $EC2_INSTANCE_ID --region us-west-2
        ignore_errors: yes

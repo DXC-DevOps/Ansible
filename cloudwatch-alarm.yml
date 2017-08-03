@@ -5,10 +5,10 @@
   vars:
      region: "us-west-2"
   tasks:
-     - name: Enable Monitoring
-       ec2:
-         region: "{{ region }}"
-         monitoring: yes
+     #- name: Enable Monitoring
+       #ec2:
+       #  region: "{{ region }}"
+       #  monitoring: yes
      - name: Get instance ID
        action: ec2_facts
      - name: CPU Alarm
@@ -27,6 +27,7 @@
          description: "This will alarm when instance cpu usage is greater than 85% for 15 minutes "
          dimensions: { "InstanceId": "{{ec2_id}}"}
          alarm_actions: ["arn:aws:sns:us-west-2:641434276274:Logging-rInstanceAlarmTopic-MINIPSHEPMCM"]
+         shell: aws ec2 monitor-instances --instance-ids 
          
      - name: Status Failed
        ec2_metric_alarm:

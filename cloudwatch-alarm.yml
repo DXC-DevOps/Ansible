@@ -1,9 +1,7 @@
-- name: create CloudWatch Alarms and enable monitoring
+- name: create CloudWatch Alarms
   hosts: all
   become: True
   gather_facts: True
-  vars:
-     region: "us-west-2"
   tasks:
      - name: Get instance ID
        action: ec2_facts
@@ -23,9 +21,6 @@
          description: "This will alarm when instance cpu usage is greater than 85% for 15 minutes "
          dimensions: { "InstanceId": "{{ec2_id}}"}
          alarm_actions: ["arn:aws:sns:us-west-2:641434276274:Logging-rInstanceAlarmTopic-MINIPSHEPMCM"]
-     - name: Monitoring
-         shell: pip install awscli --upgrade --user
-         shell: aws ec2 monitor-instances --instance-ids i-0d562e2fe57f177f7 --region 
          
      - name: Status Failed
        ec2_metric_alarm:

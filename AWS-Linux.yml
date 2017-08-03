@@ -9,6 +9,7 @@
        template:
         src: user-data.sh
         dest: /home/ec2-user/user-data.sh
+       ignore_errors: yes
      - name: Setting Up Systemd for Amazon Linux
        shell: sudo yum-config-manager --enable epel
        ignore_errors: yes

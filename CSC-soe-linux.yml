@@ -1,4 +1,4 @@
-- name: Linux MSP 
+- name: CSC SOE Linux MSP 
   hosts: all
   become: True
   #become_method: su
@@ -15,6 +15,17 @@
        ignore_errors: yes
      - name: Setup cloudwatch logs
        shell: bash /tmp/user-data.sh
+       ignore_errors: yes
+     - name: Install aws-cli
+       shell: sudo pip install awscli
+       ignore_errors: yes
+     - name: Monitor
+       template:
+        src: cli.sh
+        dest: /tmp/cli.sh
+       ignore_errors: yes
+     - name: run cli.sh
+       shell: bash /tmp/cli.sh
        ignore_errors: yes
      - name: download ssm agent
        get_url: url="https://amazon-ssm-us-west-2.s3.amazonaws.com/latest/linux_amd64/amazon-ssm-agent.rpm" dest="/tmp/amazon-ssm-agent.rpm" mode=0755

@@ -17,21 +17,21 @@
       ignore_errors: yes
       
     - name: create cloudwatch alarm for Status Failed
-      win_shell: aws cloudwatch put-metric-alarm --alarm-name status-failedi-0021dd763cc406377 --alarm-description "This will alarm when instance status check fails" --metric-name StatusCheckFailed --namespace AWS/EC2  --statistic Minimum --comparison-operator GreaterThan --region us-west-2 --unit Percent --evaluation-periods 3 --period 60 --threshold 0 --actions-enabled --alarm-actions arn:aws:sns:us-west-2:641434276274:Logging-rInstanceAlarmTopic-MINIPSHEPMCM
+      win_shell: aws cloudwatch put-metric-alarm --alarm-name status-failedi-0021dd763cc406377 --alarm-description "This will alarm when instance status check fails" --metric-name StatusCheckFailed --namespace AWS/EC2  --statistic Minimum --comparison-operator GreaterThanThreshold --region us-west-2 --unit Percent --evaluation-periods 3 --period 60 --threshold 0 --actions-enabled --alarm-actions arn:aws:sns:us-west-2:641434276274:Logging-rInstanceAlarmTopic-MINIPSHEPMCM
       ignore_errors: yes
       
     - name: create cloudwatch alarm for Status FailedSystem
-      win_shell: aws cloudwatch put-metric-alarm --alarm-name status-failed-systemi-0021dd763cc406377 --alarm-description "This will alarm when instance status check fails" --metric-name StatusCheckFailed_System --namespace AWS/EC2  --statistic Minimum --comparison-operator GreaterThan --region us-west-2 --unit Percent --evaluation-periods 3 --period 60 --threshold 0 --actions-enabled --alarm-actions arn:aws:sns:us-west-2:641434276274:Logging-rInstanceAlarmTopic-MINIPSHEPMCM
+      win_shell: aws cloudwatch put-metric-alarm --alarm-name status-failed-systemi-0021dd763cc406377 --alarm-description "This will alarm when instance status check fails" --metric-name StatusCheckFailed_System --namespace AWS/EC2  --statistic Minimum --comparison-operator GreaterThanThreshold --region us-west-2 --unit Percent --evaluation-periods 3 --period 60 --threshold 0 --actions-enabled --alarm-actions arn:aws:sns:us-west-2:641434276274:Logging-rInstanceAlarmTopic-MINIPSHEPMCM
       ignore_errors: yes
       
     - name: create cloudwatch alarm for Status Failed Instance
-      win_shell: aws cloudwatch put-metric-alarm --alarm-name status-failed-instsancei-0021dd763cc406377 --alarm-description "This will alarm when instance status check fails" --metric-name StatusCheckFailed_Instance --namespace AWS/EC2  --statistic Minimum --comparison-operator GreaterThan --region us-west-2 --unit Percent --evaluation-periods 3 --period 60 --threshold 0 --actions-enabled --alarm-actions arn:aws:sns:us-west-2:641434276274:Logging-rInstanceAlarmTopic-MINIPSHEPMCM
+      win_shell: aws cloudwatch put-metric-alarm --alarm-name status-failed-instsancei-0021dd763cc406377 --alarm-description "This will alarm when instance status check fails" --metric-name StatusCheckFailed_Instance --namespace AWS/EC2  --statistic Minimum --comparison-operator GreaterThanThreshold --region us-west-2 --unit Percent --evaluation-periods 3 --period 60 --threshold 0 --actions-enabled --alarm-actions arn:aws:sns:us-west-2:641434276274:Logging-rInstanceAlarmTopic-MINIPSHEPMCM
       ignore_errors: yes
       
     - name: create cloudwatch alarm for Memory utilization 
-      win_shell: aws cloudwatch put-metric-alarm --alarm-name memory-utili-0021dd763cc406377 --alarm-description "Alarm is triggered when the memory reaches the threshold" --metric-name MemoryUtilization --namespace Windows/Default  --statistic Minimum --comparison-operator GreaterThan --region us-west-2 --unit Percent --evaluation-periods 2 --period 300 --threshold 85 --actions-enabled --alarm-actions arn:aws:sns:us-west-2:641434276274:Logging-rInstanceAlarmTopic-MINIPSHEPMCM
+      win_shell: aws cloudwatch put-metric-alarm --alarm-name memory-utili-0021dd763cc406377 --alarm-description "Alarm is triggered when the memory reaches the threshold" --metric-name MemoryUtilization --namespace Windows/Default  --statistic Minimum --comparison-operator GreaterThanThreshold --region us-west-2 --unit Percent --evaluation-periods 2 --period 300 --threshold 85 --actions-enabled --alarm-actions arn:aws:sns:us-west-2:641434276274:Logging-rInstanceAlarmTopic-MINIPSHEPMCM
       ignore_errors: yes
       
     - name: create cloudwatch alarm for Disk Utilization
-      win_shell: aws cloudwatch put-metric-alarm --alarm-name disk-utili-0021dd763cc406377 --alarm-description "Alarm is triggered when disk is full" --metric-name DiskSpaceUtilization --namespace Windows/Default --statistic Minimum --comparison-operator GreaterThan --region us-west-2 --unit Percent --evaluation-periods 2 --period 300 --threshold 85 --actions-enabled --alarm-actions arn:aws:sns:us-west-2:641434276274:Logging-rInstanceAlarmTopic-MINIPSHEPMCM
+      win_shell: aws cloudwatch put-metric-alarm --alarm-name disk-utili-0021dd763cc406377 --alarm-description "Alarm is triggered when disk is full" --metric-name DiskSpaceUtilization --namespace Windows/Default --statistic Minimum --comparison-operator GreaterThanThreshold --region us-west-2 --unit Percent --evaluation-periods 2 --period 300 --threshold 85 --actions-enabled --alarm-actions arn:aws:sns:us-west-2:641434276274:Logging-rInstanceAlarmTopic-MINIPSHEPMCM
       ignore_errors: yes

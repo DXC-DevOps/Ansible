@@ -1,13 +1,17 @@
 - name: Creating CloudWatch Alarm for Windows instance
   hosts: all
   tasks:
-    - name: Enable aws cli and enable monitoring
+    - name: Enable aws cli
       script: aws-cli.ps1
     - name: install the msi package
       win_msi:
         path: C:\awstemp\AWSCLI64.msi
         wait: true
       ignore_errors: yes
+    - name: Get instance ID and enable monitoring
+      script: monitor.ps1
+      ignore_errors: yes
+      
     - name: create cloudwatch alarm for CPU Utilization 
       win_shell: aws cloudwatch put-metric-alarm --alarm-name CPU-util-windowsi-0021dd763cc406377 --alarm-description "Triggered by EC2 instances config/status changes." --metric-name CPUUtilization  --namespace AWS/EC2  --statistic Average --comparison-operator GreaterThanOrEqualToThreshold --region us-west-2 --unit Percent --evaluation-periods 2 --period 300 --threshold 85  --actions-enabled --alarm-actions arn:aws:sns:us-west-2:641434276274:Logging-rInstanceAlarmTopic-MINIPSHEPMCM
       ignore_errors: yes
